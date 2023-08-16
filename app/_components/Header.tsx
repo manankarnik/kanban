@@ -2,6 +2,7 @@
 import useInput from "../_hooks/useInput";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { Montserrat } from "next/font/google";
+import DarkModeToggle from "./DarkModeToggle";
 
 const headingFont = Montserrat({ subsets: ["latin"], weight: "600" });
 
@@ -12,7 +13,7 @@ function Header() {
       <h1 className={headingFont.className}>Kanban Board</h1>
       <div className="flex gap-4 text-lg">
         <div className="flex gap-2 items-center w-full rounded-md border-0 p-2 text-gray-900 bg-gray-200 ring-1 ring-inset ring-gray-300 leading-6 focus-within:ring-2 focus-within:ring-teal-700">
-          <FaSearch className="text-teal-700" />
+          <FaSearch className="text-gray-400" />
           <input
             type="text"
             name="search"
@@ -26,6 +27,7 @@ function Header() {
           <FaPlus className="inline w-4 h-4" />
           <span>Create Task</span>
         </button>
+        <DarkModeToggle />
       </div>
     </header>
   );
