@@ -1,15 +1,31 @@
 import { FaMoon, FaSun } from "react-icons/fa";
-import { useDarkMode } from "../_hooks/useDarkMode";
 
-export default function DarkModeToggle() {
-  const [darkMode, toggleDarkMode] = useDarkMode(false);
+import { cookies } from "next/headers";
+
+export async function toggleDarkMode() {
+  "use server";
+  const darkMode = cookies().get("darkMode")?.value == "true";
+  cookies().set("darkMode", (!darkMode).toString());
+}
+
+export async function getDarkMode() {
+  "use server";
+  return cookies().get("darkMode")?.value;
+}
+
+async function DarkModeToggle() {
+  const darkMode = (await getDarkMode()) == "true";
   return (
-    <button onClick={() => toggleDarkMode(!darkMode)}>
-      {darkMode ? (
-        <FaSun className="w-6 h-6" />
-      ) : (
-        <FaMoon className="w-6 h-6" />
-      )}
-    </button>
+    <form action={toggleDarkMode} className="flex items-center">
+      <button type="submit">
+        {darkMode ? (
+          <FaSun className="w-8 h-8" />
+        ) : (
+          <FaMoon className="w-8 h-8" />
+        )}
+      </button>
+    </form>
   );
 }
+
+export default DarkModeToggle;
