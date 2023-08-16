@@ -22,7 +22,7 @@ export default async function RootLayout({
       <body
         className={
           bodyFont.className +
-          " container mx-auto bg-gray-100 dark:bg-gray-800 dark:text-white"
+          " p-4 container mx-auto bg-gray-100 dark:bg-gray-800 dark:text-white"
         }
       >
         <Header />
