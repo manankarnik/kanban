@@ -1,11 +1,13 @@
 import { FaPlus } from "react-icons/fa";
 import { Montserrat } from "next/font/google";
-import DarkModeToggle from "./DarkModeToggle";
 import SearchBar from "./SearchBar";
+import { ReactNode } from "react";
 
 const headingFont = Montserrat({ subsets: ["latin"], weight: "600" });
 
-function Header() {
+type HeaderProps = { children: ReactNode };
+
+function Header({ children }: HeaderProps) {
   return (
     <header className="p-4 flex justify-between items-center text-2xl font-bold">
       <h1 className={headingFont.className}>Kanban Board</h1>
@@ -15,7 +17,7 @@ function Header() {
           <FaPlus className="inline w-4 h-4" />
           <span>Create Task</span>
         </button>
-        <DarkModeToggle />
+        {children}
       </div>
     </header>
   );
