@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode } from "react";
 import useInput from "../_hooks/useInput";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import KanbanContainer from "./KanbanContainer";
 import { ChangeEventHandler, createContext } from "react";
 import useContainers from "../_hooks/useContainers";
@@ -68,11 +68,30 @@ function Home({ children }: HomeProps) {
   return (
     <SearchContext.Provider value={{ search, setSearch }}>
       {children}
-      <main className="flex py-4 gap-4">
+      <main>
         <DragDropContext onDragEnd={onDragEnd}>
-          {filteredContainers.map((container) => (
-            <KanbanContainer key={container.title} {...container} />
-          ))}
+          <Droppable
+            droppableId="container"
+            type="container"
+            direction="horizontal"
+          >
+            {(provided) => (
+              <div ref={provided.innerRef} className="flex py-4">
+                {filteredContainers.map((container, index) => (
+                  <Draggable
+                    key={container.title}
+                    draggableId={container.title}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <KanbanContainer {...container} {...provided} />
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </DragDropContext>
       </main>
     </SearchContext.Provider>

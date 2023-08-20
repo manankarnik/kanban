@@ -15,7 +15,7 @@ function Header({ children }: HeaderProps) {
         <SearchBar />
         <button className="flex px-4 py-2 gap-2 rounded-md items-center whitespace-nowrap text-white bg-teal-700 hover:bg-teal-600">
           <FaPlus className="inline w-4 h-4" />
-          <span>Create Task</span>
+          <span>Add Container</span>
         </button>
         {children}
       </div>

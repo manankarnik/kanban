@@ -6,10 +6,10 @@ export default function useContainers(
   data: Container[],
   search: string,
 ): [
-  containers: Container[],
-  filteredContainers: Container[],
-  onDragEnd: OnDragEndResponder,
-] {
+    containers: Container[],
+    filteredContainers: Container[],
+    onDragEnd: OnDragEndResponder,
+  ] {
   const [containers, setContainers] = useState([...data]);
   const [filteredContainers, setFilteredContainers] = useState([...data]);
 
@@ -29,18 +29,24 @@ export default function useContainers(
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) {
       return;
+    } else {
+      const newContainers = [...containers];
+      if (result.source.droppableId == "container") {
+        const moved = newContainers.splice(result.source.index, 1)[0];
+        newContainers.splice(result.destination.index, 0, moved);
+      } else {
+        const src = newContainers.find(
+          (column) => column.title == result.source.droppableId,
+        );
+        const dest = newContainers.find(
+          (column) => column.title == result.destination!.droppableId,
+        );
+        const moved = src!.elements.splice(result.source.index, 1)[0];
+        dest!.elements.splice(result.destination!.index, 0, moved);
+      }
+      setContainers(newContainers);
+      setFilteredContainers(newContainers);
     }
-    const newContainers = [...containers];
-    const src = newContainers.find(
-      (column) => column.title == result.source.droppableId,
-    );
-    const dest = newContainers.find(
-      (column) => column.title == result.destination!.droppableId,
-    );
-    const moved = src!.elements.splice(result.source.index, 1)[0];
-    dest!.elements.splice(result.destination!.index, 0, moved);
-    setContainers(newContainers);
-    setFilteredContainers(newContainers);
   };
 
   return [containers, filteredContainers, onDragEnd];
