@@ -52,18 +52,17 @@ function Page() {
       return;
     }
     const newColumns = [...columns];
-    const src = newColumns.filter(
-      (element) => element.title == result.source.droppableId,
-    )[0];
-    const removed = src.elements.splice(result.source.index, 1)[0];
-    newColumns[newColumns.indexOf(src)] = src;
-    const dest = newColumns.filter(
-      (element) => element.title == result.destination!.droppableId,
-    )[0];
-    dest.elements.splice(result.destination!.index, 0, removed);
-    newColumns[newColumns.indexOf(dest)].elements = dest.elements;
+    const src = newColumns.find(
+      (column) => column.title == result.source.droppableId,
+    );
+    const dest = newColumns.find(
+      (column) => column.title == result.destination!.droppableId,
+    );
+    const moved = src!.elements.splice(result.source.index, 1)[0];
+    dest!.elements.splice(result.destination!.index, 0, moved);
     setColumns(newColumns);
   };
+
   return (
     <main className="flex py-4 gap-4">
       <DragDropContext onDragEnd={onDragEnd}>
