@@ -21,10 +21,15 @@ function KanbanContainer({
     <div
       ref={innerRef}
       {...draggableProps}
-      className="p-4 mx-4 w-full h-fit rounded-lg bg-gray-200 dark:bg-gray-700"
+      className="p-4 mx-4 min-w-[200px] w-full h-fit rounded-lg bg-gray-200 dark:bg-gray-700"
     >
       <div className="mb-4 flex justify-between items-center text-end font-semibold">
-        <h2 className="text-lg">{title}</h2>
+        <h2 className="flex items-center gap-2 text-lg">
+          {title}
+          <span className="px-3 rounded-full text-sm bg-teal-800 bg-opacity-40">
+            {elements.length}
+          </span>
+        </h2>
         <div
           {...dragHandleProps}
           className="p-2 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
@@ -33,8 +38,13 @@ function KanbanContainer({
         </div>
       </div>
       <Droppable droppableId={title} type="card">
-        {(provided) => (
+        {(provided, snapshot) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
+            {elements.length == 0 && !snapshot.isDraggingOver ? (
+              <span className="p-2 my-4 block text-center text-gray-400">
+                No tasks available
+              </span>
+            ) : null}
             {elements.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {(provided) => <KanbanCard {...item} {...provided} />}
