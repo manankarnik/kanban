@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inconsolata } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { getDarkMode } from "./_components/DarkModeToggle";
 
-const bodyFont = Inconsolata({ subsets: ["latin"], weight: "400" });
+const bodyFont = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Kanban Board",

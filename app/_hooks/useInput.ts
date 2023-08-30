@@ -1,11 +1,22 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
 export default function useInput(
   initialValue: string,
-): [value: string, setValue: ChangeEventHandler<HTMLInputElement>] {
+): [
+    value: string,
+    onInputValue: ChangeEventHandler<HTMLInputElement>,
+    setValue: Dispatch<SetStateAction<string>>,
+  ] {
   const [value, setValue] = useState(initialValue);
   return [
     value,
     (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
+    setValue,
   ];
 }

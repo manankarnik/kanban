@@ -1,4 +1,3 @@
-"use client";
 import React, { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { SearchContext } from "./Home";

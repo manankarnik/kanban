@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { DropResult, OnDragEndResponder } from "react-beautiful-dnd";
 import { Container } from "../_components/KanbanContainer";
 
@@ -8,6 +8,7 @@ export default function useContainers(
 ): [
     containers: Container[],
     filteredContainers: Container[],
+    setContainers: Dispatch<SetStateAction<Container[]>>,
     onDragEnd: OnDragEndResponder,
   ] {
   const [containers, setContainers] = useState([...data]);
@@ -49,5 +50,5 @@ export default function useContainers(
     }
   };
 
-  return [containers, filteredContainers, onDragEnd];
+  return [containers, filteredContainers, setContainers, onDragEnd];
 }
