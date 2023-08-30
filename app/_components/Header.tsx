@@ -6,6 +6,7 @@ import { ReactNode, useContext, useState } from "react";
 import PopupCard from "./PopupCard";
 import useInput from "../_hooks/useInput";
 import { ContainersContext } from "./Home";
+import { v4 as uuidv4 } from "uuid";
 
 const headingFont = Montserrat({ subsets: ["latin"], weight: "600" });
 
@@ -16,7 +17,10 @@ function Header({ children }: HeaderProps) {
   const [containerName, onInputContainerName, setContainerName] = useInput("");
   const { containers, setContainers } = useContext(ContainersContext);
   const addItem = () => {
-    setContainers([...containers, { title: containerName, elements: [] }]);
+    setContainers([
+      ...containers,
+      { id: uuidv4(), title: containerName, elements: [] },
+    ]);
     closePopup();
   };
   const closePopup = () => {

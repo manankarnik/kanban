@@ -4,6 +4,7 @@ import { FaPlus, FaArrowsAlt } from "react-icons/fa";
 import KanbanCard, { Card } from "./KanbanCard";
 
 export type Container = {
+  id: string;
   title: string;
   elements: Card[];
 };
@@ -11,6 +12,7 @@ export type Container = {
 type KanbanContainerProps = Container & DraggableProvided;
 
 function KanbanContainer({
+  id,
   title,
   elements,
   innerRef,
@@ -37,7 +39,7 @@ function KanbanContainer({
           <FaArrowsAlt />
         </div>
       </div>
-      <Droppable droppableId={title} type="card">
+      <Droppable droppableId={id} type="card">
         {(provided, snapshot) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {elements.length == 0 && !snapshot.isDraggingOver ? (

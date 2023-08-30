@@ -10,6 +10,7 @@ import useInput from "../_hooks/useInput";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import KanbanContainer, { Container } from "./KanbanContainer";
 import useContainers from "../_hooks/useContainers";
+import { v4 as uuidv4 } from "uuid";
 
 type SearchContextType = {
   search: string;
@@ -39,43 +40,48 @@ function Home({ children }: HomeProps) {
     useContainers(
       [
         {
+          id: uuidv4(),
           title: "Todo",
           elements: [
-            { id: "1", text: "Todo Card 1" },
-            { id: "2", text: "Todo Card 2" },
-            { id: "3", text: "Todo Card 3" },
+            { id: uuidv4(), text: "Todo Card 1" },
+            { id: uuidv4(), text: "Todo Card 2" },
+            { id: uuidv4(), text: "Todo Card 3" },
           ],
         },
         {
+          id: uuidv4(),
           title: "In Progress",
           elements: [
-            { id: "4", text: "In Progress Card 1" },
-            { id: "5", text: "In Progress Card 2" },
-            { id: "6", text: "In Progress Card 3" },
+            { id: uuidv4(), text: "In Progress Card 1" },
+            { id: uuidv4(), text: "In Progress Card 2" },
+            { id: uuidv4(), text: "In Progress Card 3" },
           ],
         },
         {
+          id: uuidv4(),
           title: "Review",
           elements: [
-            { id: "7", text: "Review Card 1" },
-            { id: "8", text: "Review Card 2" },
-            { id: "9", text: "Review Card 3" },
+            { id: uuidv4(), text: "Review Card 1" },
+            { id: uuidv4(), text: "Review Card 2" },
+            { id: uuidv4(), text: "Review Card 3" },
           ],
         },
         {
+          id: uuidv4(),
           title: "Testing",
           elements: [
-            { id: "10", text: "Testing Card 1" },
-            { id: "11", text: "Testing Card 2" },
-            { id: "12", text: "Testing Card 3" },
+            { id: uuidv4(), text: "Testing Card 1" },
+            { id: uuidv4(), text: "Testing Card 2" },
+            { id: uuidv4(), text: "Testing Card 3" },
           ],
         },
         {
+          id: uuidv4(),
           title: "Done",
           elements: [
-            { id: "13", text: "Done Card 1" },
-            { id: "14", text: "Done Card 2" },
-            { id: "15", text: "Done Card 3" },
+            { id: uuidv4(), text: "Done Card 1" },
+            { id: uuidv4(), text: "Done Card 2" },
+            { id: uuidv4(), text: "Done Card 3" },
           ],
         },
       ],

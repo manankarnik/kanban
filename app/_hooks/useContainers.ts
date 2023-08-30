@@ -37,10 +37,10 @@ export default function useContainers(
         newContainers.splice(result.destination.index, 0, moved);
       } else {
         const src = newContainers.find(
-          (column) => column.title == result.source.droppableId,
+          (column) => column.id == result.source.droppableId,
         );
         const dest = newContainers.find(
-          (column) => column.title == result.destination!.droppableId,
+          (column) => column.id == result.destination!.droppableId,
         );
         const moved = src!.elements.splice(result.source.index, 1)[0];
         dest!.elements.splice(result.destination!.index, 0, moved);
