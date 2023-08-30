@@ -12,7 +12,7 @@ function PopupCard({
   addItem: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
-    <div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen overflow-hidden bg-gray-900 bg-opacity-80">
+    <div className="fixed top-0 left-0 flex justify-center items-center w-screen h-screen overflow-hidden bg-gray-200 dark:bg-gray-900 bg-opacity-80 dark:bg-opacity-80">
       <div className="p-4 rounded-lg border-2 border-teal-400 bg-gray-100 dark:bg-gray-800 ring-offset-gray-600 bg-opacity-100">
         <h3 className="font-bold text-xl">{title}</h3>
         {children}
