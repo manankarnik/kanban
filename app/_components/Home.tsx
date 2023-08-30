@@ -95,7 +95,7 @@ function Home({ children }: HomeProps) {
               {(provided) => (
                 <div
                   ref={provided.innerRef}
-                  className="flex py-4 overflow-x-auto scrollbar-thin scrollbar-thumb-teal-700 scrollbar-track-gray-200 dark:scrollbar-track-gray-700"
+                  className="flex py-4 overflow-x-auto"
                 >
                   {filteredContainers.map((container, index) => (
                     <Draggable
