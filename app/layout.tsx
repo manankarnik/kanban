@@ -17,11 +17,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <body
         className={`${bodyFont.className} p-4 xl:container mx-auto bg-gray-100 dark:bg-gray-800 dark:text-white scrollbar-thin scrollbar-thumb-teal-700 scrollbar-track-gray-200 dark:scrollbar-track-gray-700`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider>
           {children}
         </ThemeProvider>
       </body>

@@ -4,7 +4,6 @@ function PopupCard({
   title,
   closeText = "Close",
   actionText = "Add",
-  actionColor = "teal",
   children,
   closePopup,
   action,
@@ -12,7 +11,6 @@ function PopupCard({
   title: string;
   closeText?: string;
   actionText?: string;
-  actionColor?: string;
   children: ReactNode;
   closePopup: MouseEventHandler<HTMLButtonElement>;
   action: MouseEventHandler<HTMLButtonElement>;
@@ -30,7 +28,7 @@ function PopupCard({
             {closeText}
           </button>
           <button
-            className={`text-lg px-4 py-2 rounded-md text-white bg-${actionColor}-700 hover:bg-${actionColor}-600`}
+            className={`text-lg px-4 py-2 rounded-md text-white ${actionText == "Remove" ?  "bg-red-700 hover:bg-red-600" : "bg-teal-700 hover:bg-teal-600"}`}
             onClick={action}
           >
             {actionText}
