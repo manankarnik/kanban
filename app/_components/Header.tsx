@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar";
 import { ReactNode, useContext, useState } from "react";
 import PopupCard from "./PopupCard";
 import useInput from "../_hooks/useInput";
-import { ContainersContext } from "./Home";
+import { ContainersContext, RemoveContext } from "./Home";
 import { v4 as uuidv4 } from "uuid";
 
 const headingFont = Montserrat({ subsets: ["latin"], weight: "600" });
@@ -16,6 +16,7 @@ function Header({ children }: HeaderProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [containerName, onInputContainerName, setContainerName] = useInput("");
   const { containers, setContainers } = useContext(ContainersContext);
+  const { remove, setRemove } = useContext(RemoveContext);
   const addItem = () => {
     setContainers([
       ...containers,
@@ -29,8 +30,17 @@ function Header({ children }: HeaderProps) {
   };
   return (
     <header className="p-4 flex justify-between items-center text-2xl font-bold">
-      <h1 className={headingFont.className}>Kanban Board</h1>
+      <div className="flex justify-center items-center gap-4">
+        <h1 className={headingFont.className}>Kanbanxt</h1>
+      </div>
       <div className="flex gap-4 text-lg">
+        <label className="text-lg font-normal inline-flex cursor-pointer items-center gap-4">
+          <div className="text-gray-400">Delete</div>
+          <div className="relative">
+              <input id="switch" value={remove} onChange={() => setRemove(!remove)} type="checkbox" className="peer sr-only" />
+              <div className="peer h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-600 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-500 peer-checked:after:translate-x-full peer-checked:after:bg-red-300"></div>
+          </div>
+      </label>
         <SearchBar />
         <button
           onClick={() => setShowPopup(true)}
@@ -44,7 +54,7 @@ function Header({ children }: HeaderProps) {
           <PopupCard
             title="Add Container"
             closePopup={closePopup}
-            addItem={addItem}
+            action={addItem}
           >
             <div className="my-4 flex gap-4 items-center">
               <label className="text-lg" htmlFor="containerName">

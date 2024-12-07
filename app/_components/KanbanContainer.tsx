@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Draggable, DraggableProvided, Droppable } from "react-beautiful-dnd";
-import { FaPlus, FaArrowsAlt } from "react-icons/fa";
+import { FaPlus, FaArrowsAlt, FaTrash } from "react-icons/fa";
 import KanbanCard, { Card } from "./KanbanCard";
 import PopupCard from "./PopupCard";
 import useInput from "../_hooks/useInput";
 import { ContainersContext } from "./Home";
+import { RemoveContext } from "./Home";
 import { v4 as uuidv4 } from "uuid";
 
 export type Container = {
@@ -13,19 +14,22 @@ export type Container = {
   elements: Card[];
 };
 
-type KanbanContainerProps = Container & DraggableProvided;
+type KanbanContainerProps = Container & Function & DraggableProvided;
 
 function KanbanContainer({
   id,
   title,
   elements,
+  removeContainer,
   innerRef,
   draggableProps,
   dragHandleProps,
 }: KanbanContainerProps) {
   const [showPopup, setShowPopup] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [taskName, onInputTaskName, setTaskName] = useInput("");
   const { containers, setContainers } = useContext(ContainersContext);
+  const { remove, setRemove } = useContext(RemoveContext);
   const addItem = () => {
     const newContainers = [...containers];
     newContainers
@@ -38,11 +42,18 @@ function KanbanContainer({
     setTaskName("");
     setShowPopup(false);
   };
+  const removeCard = function(cardId) {
+      const newContainers = [...containers]
+      const elements = newContainers.find((container) => container.id == id)!.elements
+      elements.splice(elements.findIndex(e => e.id == cardId), 1);
+      setContainers(newContainers);
+  }
+
   return (
     <div
       ref={innerRef}
       {...draggableProps}
-      className="p-4 mx-4 min-w-[200px] w-full h-fit rounded-lg bg-gray-200 dark:bg-gray-700"
+      className="p-4 mx-4 min-w-[200px] max-w-[300px] w-full h-fit rounded-lg bg-gray-200 dark:bg-gray-700"
     >
       <div className="mb-4 flex justify-between items-center text-end font-semibold">
         <h2 className="flex items-center gap-2 text-lg">
@@ -51,11 +62,18 @@ function KanbanContainer({
             {elements.length}
           </span>
         </h2>
-        <div
-          {...dragHandleProps}
-          className="p-2 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
-        >
-          <FaArrowsAlt />
+        <div className="flex justify-center items-center gap-2">
+          <div
+            {...dragHandleProps}
+            className="p-2 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
+          >
+            <FaArrowsAlt />
+          </div>
+          {remove ? (
+              <button onClick={() => setShowConfirm(true)}>
+                <FaTrash className="text-red-500"/>
+              </button>
+          ) : null}
         </div>
       </div>
       <Droppable droppableId={id} type="card">
@@ -68,7 +86,7 @@ function KanbanContainer({
             ) : null}
             {elements.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided) => <KanbanCard {...item} {...provided} />}
+                {(provided) => <KanbanCard {...item} removeCard={() => removeCard(item.id)} {...provided} />}
               </Draggable>
             ))}
             {provided.placeholder}
@@ -82,8 +100,15 @@ function KanbanContainer({
         <FaPlus className="inline w-4 h-4" />
         <span>Add task</span>
       </button>
+      {showConfirm ? (
+        <PopupCard title="Remove Container?" closePopup={() => setShowConfirm(false)} actionText="Remove" action={removeContainer}>
+          <div className="my-4 flex gap-4 items-center">
+            All the cards in this container will be removed.
+          </div>
+        </PopupCard>
+      ) : null}
       {showPopup ? (
-        <PopupCard title="Add Task" closePopup={closePopup} addItem={addItem}>
+        <PopupCard title="Add Task" closePopup={closePopup} action={addItem}>
           <div className="my-4 flex gap-4 items-center">
             <label className="text-lg" htmlFor="taskName">
               Task Name
