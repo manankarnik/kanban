@@ -1,31 +1,28 @@
-import { FaMoon, FaSun } from "react-icons/fa";
+"use client";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
 
-import { cookies } from "next/headers";
+export function DarkModeToggle() {
+  const [mounted, setMounted] = useState(false)
+  const { systemTheme, theme, setTheme } = useTheme()
 
-export async function toggleDarkMode() {
-  "use server";
-  const darkMode = cookies().get("darkMode")?.value == "true";
-  cookies().set("darkMode", (!darkMode).toString());
-}
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-export async function getDarkMode() {
-  "use server";
-  return cookies().get("darkMode")?.value;
-}
+  if(!mounted) return null
 
-async function DarkModeToggle() {
-  const darkMode = (await getDarkMode()) == "true";
   return (
-    <form action={toggleDarkMode} className="flex items-center">
-      <button type="submit">
-        {darkMode ? (
-          <FaSun className="w-8 h-8" />
-        ) : (
-          <FaMoon className="w-8 h-8" />
-        )}
-      </button>
-    </form>
+    <button type="submit" onClick={() => setTheme(theme == "dark" ? "light" : "dark")}>
+      {theme == "dark" ? (
+        <FaSun className="w-8 h-8" />
+      ) : (
+        <FaMoon className="w-8 h-8" />
+      )}
+    </button>
   );
 }
 
 export default DarkModeToggle;
+

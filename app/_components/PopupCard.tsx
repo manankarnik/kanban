@@ -2,13 +2,17 @@ import { MouseEventHandler, ReactNode } from "react";
 
 function PopupCard({
   title,
+  closeText = "Close",
   actionText = "Add",
+  actionColor = "teal",
   children,
   closePopup,
   action,
 }: {
   title: string;
+  closeText?: string;
   actionText?: string;
+  actionColor?: string;
   children: ReactNode;
   closePopup: MouseEventHandler<HTMLButtonElement>;
   action: MouseEventHandler<HTMLButtonElement>;
@@ -20,13 +24,13 @@ function PopupCard({
         {children}
         <div className="flex justify-end items-center gap-2">
           <button
-            className="text-lg px-4 py-2 rounded-md text-white bg-red-700 hover:bg-red-600"
+            className="text-lg px-4 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
             onClick={closePopup}
           >
-            Close
+            {closeText}
           </button>
           <button
-            className="text-lg px-4 py-2 rounded-md text-white bg-teal-700 hover:bg-teal-600"
+            className={`text-lg px-4 py-2 rounded-md text-white bg-${actionColor}-700 hover:bg-${actionColor}-600`}
             onClick={action}
           >
             {actionText}

@@ -58,7 +58,7 @@ function KanbanContainer({
       <div className="mb-4 flex justify-between items-center text-end font-semibold">
         <h2 className="flex items-center gap-2 text-lg">
           {title}
-          <span className="px-3 rounded-full text-sm bg-teal-800 bg-opacity-40">
+          <span className="px-3 rounded-full text-sm text-white bg-teal-700">
             {elements.length}
           </span>
         </h2>
@@ -101,7 +101,7 @@ function KanbanContainer({
         <span>Add task</span>
       </button>
       {showConfirm ? (
-        <PopupCard title="Remove Container?" closePopup={() => setShowConfirm(false)} actionText="Remove" action={removeContainer}>
+        <PopupCard title="Remove Container?" closePopup={() => setShowConfirm(false)} actionText="Remove" actionColor="red" action={removeContainer}>
           <div className="my-4 flex gap-4 items-center">
             All the cards in this container will be removed.
           </div>
