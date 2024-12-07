@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { darkMode } from "./_components/DarkModeToggle";
 import ThemeProvider from "./ThemeProvider";
 
 const bodyFont = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={darkMode ? "dark" : ""} lang="en">
+    <html lang="en">
       <body
         className={`${bodyFont.className} p-4 xl:container mx-auto bg-gray-100 dark:bg-gray-800 dark:text-white scrollbar-thin scrollbar-thumb-teal-700 scrollbar-track-gray-200 dark:scrollbar-track-gray-700`}
       >
