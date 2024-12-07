@@ -37,7 +37,7 @@ function Header({ children }: HeaderProps) {
         <label className="text-lg font-normal inline-flex cursor-pointer items-center gap-4">
           <div className="text-gray-400">Delete</div>
           <div className="relative">
-              <input id="switch" value={remove} onChange={() => setRemove(!remove)} type="checkbox" className="peer sr-only" />
+              <input id="switch" checked={remove} onChange={() => setRemove(!remove)} type="checkbox" className="peer sr-only" />
               <div className="peer h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-600 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-500 peer-checked:after:translate-x-full peer-checked:after:bg-red-300"></div>
           </div>
       </label>

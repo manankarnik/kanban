@@ -6,7 +6,7 @@ import { RemoveContext } from "./Home";
 
 export type Card = { id: string; text: string };
 
-type CardProps = Card & Function & DraggableProvided;
+type CardProps = Card & {removeCard: () => void } & DraggableProvided;
 
 function KanbanCard({
   text,

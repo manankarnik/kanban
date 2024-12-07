@@ -16,8 +16,8 @@ import useContainers from "../_hooks/useContainers";
 import { v4 as uuidv4 } from "uuid";
 
 type RemoveContextType = {
-  remove: bool;
-  setRemove: Dispatch<SetStateAction<bool>>;
+  remove: boolean;
+  setRemove: Dispatch<SetStateAction<boolean>>;
 };
 
 export const RemoveContext = createContext<RemoveContextType>({
@@ -100,7 +100,7 @@ function Home({ children }: HomeProps) {
       },
     ],
   ), []);
-  const removeContainer = function(id) {
+  const removeContainer = (id: string) => {
       const newContainers = [...containers]
       newContainers.splice(newContainers.findIndex(e => e.id == id), 1);
       setContainers(newContainers);

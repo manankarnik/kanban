@@ -14,7 +14,7 @@ export type Container = {
   elements: Card[];
 };
 
-type KanbanContainerProps = Container & Function & DraggableProvided;
+type KanbanContainerProps = Container & { removeContainer: () => void; } & DraggableProvided;
 
 function KanbanContainer({
   id,
@@ -42,7 +42,7 @@ function KanbanContainer({
     setTaskName("");
     setShowPopup(false);
   };
-  const removeCard = function(cardId) {
+  const removeCard = function(cardId: string) {
       const newContainers = [...containers]
       const elements = newContainers.find((container) => container.id == id)!.elements
       elements.splice(elements.findIndex(e => e.id == cardId), 1);

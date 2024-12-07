@@ -2,13 +2,13 @@ import { MouseEventHandler, ReactNode } from "react";
 
 function PopupCard({
   title,
-  actionText,
+  actionText = "Add",
   children,
   closePopup,
   action,
 }: {
   title: string;
-  actionText: string;
+  actionText?: string;
   children: ReactNode;
   closePopup: MouseEventHandler<HTMLButtonElement>;
   action: MouseEventHandler<HTMLButtonElement>;
@@ -29,7 +29,7 @@ function PopupCard({
             className="text-lg px-4 py-2 rounded-md text-white bg-teal-700 hover:bg-teal-600"
             onClick={action}
           >
-            {actionText || "Add"}
+            {actionText}
           </button>
         </div>
       </div>
