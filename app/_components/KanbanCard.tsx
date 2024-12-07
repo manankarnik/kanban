@@ -31,7 +31,7 @@ function KanbanCard({
           </button>
       ) : null}
       {showConfirm ? (
-        <PopupCard title="Remove Card?" closePopup={() => setShowConfirm(false)} actionText="Remove" actionColor="red" action={removeCard}>
+        <PopupCard title="Remove Card?" closePopup={() => setShowConfirm(false)} actionText="Remove" action={removeCard}>
           <div className="my-4 flex gap-4 items-center">
             The card will be removed from the container.
           </div>

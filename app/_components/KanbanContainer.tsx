@@ -101,7 +101,7 @@ function KanbanContainer({
         <span>Add task</span>
       </button>
       {showConfirm ? (
-        <PopupCard title="Remove Container?" closePopup={() => setShowConfirm(false)} actionText="Remove" actionColor="red" action={removeContainer}>
+        <PopupCard title="Remove Container?" closePopup={() => setShowConfirm(false)} actionText="Remove" action={removeContainer}>
           <div className="my-4 flex gap-4 items-center">
             All the cards in this container will be removed.
           </div>
