@@ -29,12 +29,10 @@ function Header({ children }: HeaderProps) {
     setShowPopup(false);
   };
   return (
-    <header className="p-4 flex justify-between items-center text-2xl font-bold">
-      <div className="flex justify-center items-center gap-4">
-        <h1 className={headingFont.className}>Kanbanxt</h1>
-      </div>
+    <header className="p-4 flex justify-between items-center text-2xl">
+      <h1 className={`font-bold ${headingFont.className}`}>Kanbanxt</h1>
       <div className="flex gap-4 text-lg">
-        <label className="text-lg font-normal inline-flex cursor-pointer items-center gap-4">
+        <label className="text-lg inline-flex cursor-pointer items-center gap-4">
           <div className="text-gray-400">Delete</div>
           <div className="relative">
               <input id="switch" checked={remove} onChange={() => setRemove(!remove)} type="checkbox" className="peer sr-only" />
