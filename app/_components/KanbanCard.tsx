@@ -22,7 +22,7 @@ function KanbanCard({
       ref={innerRef}
       {...draggableProps}
       {...dragHandleProps}
-      className="p-4 mb-4 flex justify-between items-center gap-2 rounded-lg bg-gray-100 dark:bg-gray-800 ring-offset-gray-600"
+      className="p-4 mb-4 flex justify-between items-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 ring-offset-slate-600"
     >
       <div>{text}</div>
       {remove ? (

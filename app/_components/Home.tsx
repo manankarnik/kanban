@@ -12,6 +12,7 @@ import {
 import useInput from "../_hooks/useInput";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import KanbanContainer, { Container } from "./KanbanContainer";
+import Header from "./Header";
 import useContainers from "../_hooks/useContainers";
 import { v4 as uuidv4 } from "uuid";
 
@@ -45,9 +46,8 @@ export const ContainersContext = createContext<ContainersContextType>({
   setContainers: () => { },
 });
 
-type HomeProps = { children: ReactNode };
 
-function Home({ children }: HomeProps) {
+function Home() {
   const [search, setSearch] = useInput("");
   const [containers, filteredContainers, setContainers, onDragEnd] = useContainers([], search);
   const [ remove, setRemove ] = useState(false);
@@ -109,7 +109,7 @@ function Home({ children }: HomeProps) {
     <RemoveContext.Provider value={{ remove, setRemove }}>
       <ContainersContext.Provider value={{ containers, setContainers }}>
         <SearchContext.Provider value={{ search, setSearch }}>
-          {children}
+          <Header />
           <main>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable
@@ -120,7 +120,7 @@ function Home({ children }: HomeProps) {
                 {(provided) => (
                   <div
                     ref={provided.innerRef}
-                    className="flex py-4 justify-center overflow-x-auto"
+                    className="sm:flex overflow-x-auto"
                   >
                     {filteredContainers.map((container, index) => (
                       <Draggable

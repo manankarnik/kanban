@@ -53,7 +53,7 @@ function KanbanContainer({
     <div
       ref={innerRef}
       {...draggableProps}
-      className="p-4 mx-4 min-w-[200px] max-w-[300px] w-full h-fit rounded-lg bg-gray-200 dark:bg-gray-700"
+      className="p-4 my-4 sm:mx-4 w-full mx-auto sm:min-w-[200px] max-w-[300px] h-fit rounded-lg bg-slate-200 dark:bg-slate-700"
     >
       <div className="mb-4 flex justify-between items-center text-end font-semibold">
         <h2 className="flex items-center gap-2 text-lg">
@@ -65,7 +65,7 @@ function KanbanContainer({
         <div className="flex justify-center items-center gap-2">
           <div
             {...dragHandleProps}
-            className="p-2 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
+            className="p-2 text-slate-500 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100"
           >
             <FaArrowsAlt />
           </div>
@@ -80,7 +80,7 @@ function KanbanContainer({
         {(provided, snapshot) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {elements.length == 0 && !snapshot.isDraggingOver ? (
-              <span className="p-2 my-4 block text-center text-gray-400">
+              <span className="p-2 my-4 block text-center text-slate-400">
                 No tasks available
               </span>
             ) : null}
@@ -109,12 +109,12 @@ function KanbanContainer({
       ) : null}
       {showPopup ? (
         <PopupCard title="Add Task" closePopup={closePopup} action={addItem}>
-          <div className="my-4 flex gap-4 items-center">
-            <label className="text-lg" htmlFor="taskName">
+          <div className="my-4 sm:flex gap-4 items-center">
+            <label className="whitespace-nowrap text-lg" htmlFor="taskName">
               Task Name
             </label>
             <input
-              className="rounded-md border-0 p-2 text-black dark:text-white bg-gray-200 dark:bg-gray-600 ring-1 ring-inset ring-gray-300 dark:ring-gray-800 leading-6 focus-within:ring-2 focus-within:ring-teal-700 dark:focus-within:ring-teal-600 outline-0"
+              className="w-full rounded-md border-0 p-2 text-black dark:text-white bg-slate-200 dark:bg-slate-600 ring-1 ring-inset ring-slate-300 dark:ring-slate-800 leading-6 focus-within:ring-2 focus-within:ring-teal-700 dark:focus-within:ring-teal-600 outline-0"
               type="text"
               name="taskName"
               id="taskName"
