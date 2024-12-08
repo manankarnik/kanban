@@ -48,6 +48,7 @@ export const ContainersContext = createContext<ContainersContextType>({
 
 
 function Home() {
+  const [windowWidth, setWindowWidth] = useState(0);
   const [search, setSearch] = useInput("");
   const [containers, filteredContainers, setContainers, onDragEnd] = useContainers([], search);
   const [ remove, setRemove ] = useState(false);
@@ -100,6 +101,13 @@ function Home() {
       },
     ],
   ), []);
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize, false);
+  }, []);
   const removeContainer = (id: string) => {
       const newContainers = [...containers]
       newContainers.splice(newContainers.findIndex(e => e.id == id), 1);
@@ -110,12 +118,12 @@ function Home() {
       <ContainersContext.Provider value={{ containers, setContainers }}>
         <SearchContext.Provider value={{ search, setSearch }}>
           <Header />
-          <main>
+          <main class="max-w-[300px] sm:max-w-none mx-auto">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable
                 droppableId="container"
                 type="container"
-                direction="horizontal"
+                direction={windowWidth < 640 ? "vertical" : "horizontal"}
               >
                 {(provided) => (
                   <div

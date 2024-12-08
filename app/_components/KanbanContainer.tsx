@@ -53,7 +53,7 @@ function KanbanContainer({
     <div
       ref={innerRef}
       {...draggableProps}
-      className="p-4 my-4 sm:mx-4 w-full mx-auto sm:min-w-[200px] max-w-[300px] h-fit rounded-lg bg-slate-200 dark:bg-slate-700"
+      className="p-4 my-4 sm:mx-4 w-full sm:min-w-[200px] h-fit rounded-lg bg-slate-200 dark:bg-slate-700"
     >
       <div className="mb-4 flex justify-between items-center text-end font-semibold">
         <h2 className="flex items-center gap-2 text-lg">
