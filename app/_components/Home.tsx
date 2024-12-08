@@ -118,7 +118,7 @@ function Home() {
       <ContainersContext.Provider value={{ containers, setContainers }}>
         <SearchContext.Provider value={{ search, setSearch }}>
           <Header />
-          <main class="max-w-[300px] sm:max-w-none mx-auto">
+          <main className="max-w-[300px] sm:max-w-none mx-auto">
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable
                 droppableId="container"
